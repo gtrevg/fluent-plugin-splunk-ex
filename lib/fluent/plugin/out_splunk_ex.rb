@@ -33,10 +33,10 @@ class Fluent::SplunkExOutput < Fluent::Output
     @format_fn.call({"more" => "stuff"})
 
     if test_mode
-      @send_data = proc {|text| log.info("test mode text: #{text}") }
+      @send_data = proc { |text| log.info("test mode text: #{text}") }
     else
       @splunk_connection = TCPSocket.open(@host, @port)
-      @send_data = self.class.splunk_send
+      @send_data = self.method(:splunk_send)
     end
   end
 
@@ -77,8 +77,8 @@ class Fluent::SplunkExOutput < Fluent::Output
     json_str = record.to_json
   end
 
-  def self.splunk_send(text)
-    log.debug("splunk text: #{text}")
+  def splunk_send(text)
+    log.debug("splunk_send: #{text}")
     @splunk_connection.puts(text)
   end
 
