@@ -25,13 +25,7 @@ key/value (k1=v1 k2=v2) or json format for easy splunk parsing.
 
 ### Splunk
 
-Because the plugin will batch send data to Splunk, you'll want to update your `apps/search/local/props.conf`
-file to specify that Splunk should split on newlines as the kv & json formats will not contain any newlines
-within the individual log data.  The value to set is:
-
-    SHOULD_LINEMERGE = false
-    
-Additionally, you may want to open up a special TCP port just for the FluentD logs.  To do that, go to
+You may need to open up a special TCP port just for the fluentd logs.  To do that, go to
 `Manager -> Data Inputs -> TCP -> New`.  Then decide the following:
 
 * Port
@@ -42,6 +36,16 @@ Additionally, you may want to open up a special TCP port just for the FluentD lo
 After enabling these settings, you'll be able to see your fluentd logs appear in your Splunk search interface.
 The JSON format will automagically be parsed and indexed based on the keys passed in.
 
+Because the plugin batch send data to Splunk, you'll want to update your `apps/search/local/props.conf`
+file to specify that Splunk should split on newlines. If you do not update this setting, you find that
+all logs from a similar time slice will be stacked upon each other.  Because the kv & json formats do
+not contain any newline characters, splitting on the newline will solve this problem.  The values to
+add to this file are:
+
+    [<source_type_here>]
+    SHOULD_LINEMERGE = false
+    
+This will make sure that the new source type you just set up for fluentd will always split on the newline character.
 
 ## Copyright
 
