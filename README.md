@@ -1,16 +1,16 @@
-= Splunk output plugin for Fluent event collector
+# Splunk output plugin for Fluent event collector
 
-== Overview
+## Overview
 
 This plugin will send your fluentd logs to a splunk server.  It can send the data in either
 key/value (k1=v1 k2=v2) or json format for easy splunk parsing.
 
 
-== Installation
+## Installation
 
     gem install fluent-plugin-splunk-ex
 
-== Configuration
+## Configuration
 
     <match pattern>
       type splunk_ex
@@ -21,9 +21,9 @@ key/value (k1=v1 k2=v2) or json format for easy splunk parsing.
       format kv|json       # default: kv
     </match>
 
-== Copyright
+## Copyright
 
-Copyright:: Copyright (c) 2014 Trevor Gattis
-License::   Apache License, Version 2.0
+Copyright: Copyright (c) 2014 Trevor Gattis
+License:  Apache License, Version 2.0
 
 
