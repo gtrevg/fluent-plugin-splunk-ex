@@ -23,7 +23,10 @@ key/value (k1=v1 k2=v2) or json format for easy splunk parsing.
 
 ## Copyright
 
-Copyright: Copyright (c) 2014 Trevor Gattis
-License:  Apache License, Version 2.0
+Copyright (c) 2014 Trevor Gattis
+
+## License
+
+Apache License, Version 2.0
 
 
