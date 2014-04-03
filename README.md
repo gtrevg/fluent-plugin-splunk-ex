@@ -1,4 +1,3 @@
-# Splunk output plugin for Fluent event collector
 
 ## Overview
 
