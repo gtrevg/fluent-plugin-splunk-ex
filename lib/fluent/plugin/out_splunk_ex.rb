@@ -88,7 +88,7 @@ class Fluent::SplunkExOutput < Fluent::Output
     begin
       @splunk_connection.puts(text)
     rescue SocketError => se
-      log.warn("error occurred with socket: #{se}"
+      log.warn("error occurred with socket: #{se}")
       @splunk_connection = TCPSocket.open(@host, @port)
     end
 
@@ -105,7 +105,7 @@ class Fluent::SplunkExOutput < Fluent::Output
     end
 
     if (err_occurred && socket_tries >= SOCKET_TRY_MAX)
-      log.fatal("splunk_send - retry of sending data failed after #{SOCKET_TRY_MAX} chances."
+      log.fatal("splunk_send - retry of sending data failed after #{SOCKET_TRY_MAX} chances.")
       log.warn(text)
     end
      
