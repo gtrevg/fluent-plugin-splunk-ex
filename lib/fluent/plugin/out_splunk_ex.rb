@@ -2,11 +2,14 @@ require 'open-uri'
 require 'json'
 
 class Fluent::SplunkExOutput < Fluent::Output
+
+  SOCKET_TRY_MAX = 3
+
   Fluent::Plugin.register_output('splunk_ex', self)
 
   config_param :host, :string, :default => 'localhost'
   config_param :port, :string, :default => 9997
-  config_param :format, :string, :default => 'kv'
+  config_param :format, :string, :default => 'json'
   config_param :use_time, :bool, :default => false
   config_param :time_key, :string, :default => 'time'
 
@@ -30,14 +33,14 @@ class Fluent::SplunkExOutput < Fluent::Output
       @format_fn = self.class.method(:format_json)
     end
 
-    @format_fn.call({"more" => "stuff"})
-
     if test_mode
       @send_data = proc { |text| log.info("test mode text: #{text}") }
     else
       @splunk_connection = TCPSocket.open(@host, @port)
       @send_data = self.method(:splunk_send)
     end
+
+    @socket_tries = 0
   end
 
 
@@ -79,7 +82,33 @@ class Fluent::SplunkExOutput < Fluent::Output
 
   def splunk_send(text)
     log.debug("splunk_send: #{text}")
-    @splunk_connection.puts(text)
+    err_occurred = false
+    socket_tries = 0
+
+    begin
+      @splunk_connection.puts(text)
+    rescue SocketError => se
+      log.warn("error occurred with socket: #{se}"
+      @splunk_connection = TCPSocket.open(@host, @port)
+    end
+
+    while (err_occurred && @socket_tries < SOCKET_TRY_MAX)
+      begin
+        @splunk_connection.puts(text)
+	socket_tries = 0
+        err_occurred = false     
+      rescue SocketError => se
+        socket_tries++
+        log.error("splunk_send - socket retry (#{socket_tries}) failed: #{se}")
+        @splunk_connection = TCPSocket.open(@host, @port)
+      end
+    end
+
+    if (err_occurred && socket_tries >= SOCKET_TRY_MAX)
+      log.fatal("splunk_send - retry of sending data failed after #{SOCKET_TRY_MAX} chances."
+      log.warn(text)
+    end
+     
   end
 
 
