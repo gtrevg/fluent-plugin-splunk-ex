@@ -28,35 +28,31 @@ multi_key_message = {
 time = Time.now.to_i
 
 driver_kv = create_driver(%[
-  log_level fatal
-
-  test_mode true
-  format kv
+  log_level     fatal
+  test_mode     true
+  output_format kv
 ])
 
 driver_json = create_driver(%[
-  log_level fatal
-
-  test_mode true
-  format json
+  log_level     fatal
+  test_mode     true
+  output_format json
 ])
 
 driver_kv_time = create_driver(%[
   log_level fatal
-
   test_mode true
-  format kv
+  output_format kv
   time_key myKey
-  use_time true
+  include_time_key true
 ])
 
 driver_json_time = create_driver(%[
   log_level fatal
-
   test_mode true
-  format json
+  output_format json
   time_key myKey
-  use_time true
+  include_time_key true
 ])
 
 

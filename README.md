@@ -16,11 +16,9 @@ key/value (k1=v1 k2=v2) or json format for easy splunk parsing.
 
     <match pattern>
       type splunk_ex
-      host <splunk_host>   # default: localhost
-      port <splunk_port>   # default: 9997
-      use_time <boolean>   # default: false
-      time_key <string>    # default: time
-      format kv|json       # default: kv
+      host <splunk_host>          # default: localhost
+      port <splunk_port>          # default: 9997
+      output_format json|kv       # default: json
     </match>
 
 ### Splunk
