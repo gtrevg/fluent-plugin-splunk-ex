@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |gem|
   gem.name         = "fluent-plugin-splunk-ex"
-  gem.version      = "1.0.0"
+  gem.version      = "1.0.1"
 
   gem.authors      = ["Trevor Gattis"]
   gem.email        = "github@trevorgattis.com"
-  gem.description  = "Splunk output plugin for Fluent event collector"
-  gem.homepage     = "https://github.com/ggatti000/fluent-plugin-splunk-ex"
+  gem.description  = "Splunk output plugin for Fluent event collector.  It supports reconnecting on socket failure as well as exporting the data as json or in key/value pairs"
+  gem.homepage     = "https://github.com/gtrevg/fluent-plugin-splunk-ex"
   gem.summary      = gem.description
   gem.license      = "APLv2"
   gem.has_rdoc = false
