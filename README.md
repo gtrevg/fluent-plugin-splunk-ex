@@ -17,7 +17,7 @@ key/value (k1=v1 k2=v2) or json format for easy splunk parsing.
     <match pattern>
       type splunk_ex
       host <splunk_host>          # default: localhost
-      port <splunk_port>          # default: 9997
+      port <splunk_port>          # default: 9997 - but you'll want to change this
       output_format json|kv       # default: json
     </match>
 
@@ -32,9 +32,9 @@ You may need to open up a special TCP port just for the fluentd logs.  To do tha
 * Index ( default works well )
 
 After enabling these settings, you'll be able to see your fluentd logs appear in your Splunk search interface.
-The JSON format will automagically be parsed and indexed based on the keys passed in.
+The JSON format will be automagically parsed and indexed based on the keys passed in.
 
-Because the plugin batch send data to Splunk, you'll want to update your `apps/search/local/props.conf`
+Because the plugin batch sends data to Splunk, you'll want to update your `apps/search/local/props.conf`
 file to specify that Splunk should split on newlines. If you do not update this setting, you find that
 all logs from a similar time slice will be stacked upon each other.  Because the kv & json formats do
 not contain any newline characters, splitting on the newline will solve this problem.  The values to
