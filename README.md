@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gtrevg/fluent-plugin-splunk-ex.svg?branch=master)](https://travis-ci.org/gtrevg/fluent-plugin-splunk-ex)
+[![Build Status](https://travis-ci.org/gtrevg/fluent-plugin-splunk-ex.svg?branch=master)](https://travis-ci.org/gtrevg/fluent-plugin-splunk-ex)  [![Code Climate](https://codeclimate.com/github/gtrevg/fluent-plugin-splunk-ex.png)](https://codeclimate.com/github/gtrevg/fluent-plugin-splunk-ex)
 
 ## Overview
 
